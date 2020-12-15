@@ -10,18 +10,21 @@ class SushiContainer extends React.Component{
   }
 
   sushis = () => {
-    return this.props.sushiArray.map(sushi => <Sushi key={sushi.id} sushi={sushi} />)
+    return this.props.sushiArray.map(sushi => <Sushi key={sushi.id} handleEatenSushi={this.props.handleEatenSushi} sushi={sushi} />).slice(this.state.startIndex, this.state.finishIndex)
   }
 
   moreSushi = () => {
-    this.setState({startIndex: this.state.startIndex + 4, finishIndex: this.state.finishIndex + 4})
+    this.setState({
+      startIndex: this.state.startIndex + 4, 
+      finishIndex: this.state.finishIndex + 4
+    })
   }
 
+
   render(){
-    console.log(this.state.startIndex, this.state.finishIndex)
     return (
         <div className="belt">
-          {this.sushis().slice(this.state.startIndex, this.state.finishIndex)}
+          {this.sushis()}
           <MoreButton handleClick={this.moreSushi}/>
         </div>
     )

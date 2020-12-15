@@ -8,18 +8,24 @@ const API = "http://localhost:3000/sushis"
 class App extends Component {
 
   state = {
-    sushis: []
+    sushis: [],
+    eatenSushi: []
   }
 
   componentDidMount(){
     fetch(API).then(r => r.json()).then(sushis => this.setState({sushis: sushis}))
   }
 
+  handleEatenSushi = (sushi) => {
+    this.setState({eatenSushi: [...this.state.eatenSushi, sushi]})
+  }
+
   render() {
+    console.log(this.state.eatenSushi)
     return (
       <div className="app">
-        <SushiContainer sushiArray={this.state.sushis}/>
-        <Table />
+        <SushiContainer handleEatenSushi={this.handleEatenSushi} sushiArray={this.state.sushis}/>
+        <Table eatenSushi={this.state.eatenSushi}/>
       </div>
     );
   }
