@@ -10,7 +10,7 @@ class SushiContainer extends React.Component{
   }
 
   sushis = () => {
-    return this.props.sushiArray.map(sushi => <Sushi key={sushi.id} handleEatenSushi={this.props.handleEatenSushi} sushi={sushi} />).slice(this.state.startIndex, this.state.finishIndex)
+    return this.props.sushiArray.map(sushi => <Sushi key={sushi.id} moneyRemaining={this.props.moneyRemaining} makeMoney={this.props.makeMoney} handleEatenSushi={this.props.handleEatenSushi} sushi={sushi} />).slice(this.state.startIndex, this.state.finishIndex)
   }
 
   moreSushi = () => {

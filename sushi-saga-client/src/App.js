@@ -9,7 +9,8 @@ class App extends Component {
 
   state = {
     sushis: [],
-    eatenSushi: []
+    eatenSushi: [],
+    startMoney: 100
   }
 
   componentDidMount(){
@@ -17,15 +18,22 @@ class App extends Component {
   }
 
   handleEatenSushi = (sushi) => {
-    this.setState({eatenSushi: [...this.state.eatenSushi, sushi]})
+      if (!this.state.eatenSushi.find(sushiEl => sushiEl.id === sushi.id)){
+        this.setState({eatenSushi: [...this.state.eatenSushi, sushi]})
+      } else {
+        this.setState({eatenSushi: this.state.eatenSushi})
+    }
+  }
+
+  makeMoney = (price) => {
+      this.setState({startMoney: this.state.startMoney - price})
   }
 
   render() {
-    console.log(this.state.eatenSushi)
     return (
       <div className="app">
-        <SushiContainer handleEatenSushi={this.handleEatenSushi} sushiArray={this.state.sushis}/>
-        <Table eatenSushi={this.state.eatenSushi}/>
+        <SushiContainer moneyRemaining={this.state.startMoney} makeMoney={this.makeMoney} handleEatenSushi={this.handleEatenSushi} sushiArray={this.state.sushis}/>
+        <Table moneyRemaining={this.state.startMoney} eatenSushi={this.state.eatenSushi}/>
       </div>
     );
   }
