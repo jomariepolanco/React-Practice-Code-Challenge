@@ -12,13 +12,13 @@ class App extends Component {
   }
 
   componentDidMount(){
-    fetch(API).then(r => r.json()).then(sushis => this.setState({sushis}))
+    fetch(API).then(r => r.json()).then(sushis => this.setState({sushis: sushis}))
   }
 
   render() {
     return (
       <div className="app">
-        <SushiContainer />
+        <SushiContainer sushiArray={this.state.sushis}/>
         <Table />
       </div>
     );
