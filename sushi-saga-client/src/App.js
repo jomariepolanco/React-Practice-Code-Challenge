@@ -15,10 +15,15 @@ class App extends Component {
   }
 
   componentDidMount(){
-    fetch(API).then(r => r.json()).then(sushis => this.setState({sushis: sushis}))
+    fetch(API).then(r => r.json()).then(sushis => {
+      sushis.forEach(sush => sush.eaten = false)
+      this.setState({sushis: sushis})
+    })
   }
 
   handleEatenSushi = (sushi) => {
+      const eatenSushi = this.state.sushis.find(sush => sush.id === sushi.id)
+      eatenSushi.eaten = true
       if (!this.state.eatenSushi.find(sushiEl => sushiEl.id === sushi.id)){
         this.setState({eatenSushi: [...this.state.eatenSushi, sushi]})
       } else {

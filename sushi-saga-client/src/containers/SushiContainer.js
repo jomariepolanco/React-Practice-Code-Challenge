@@ -14,14 +14,22 @@ class SushiContainer extends React.Component{
   }
 
   moreSushi = () => {
-    this.setState({
-      startIndex: this.state.startIndex + 4, 
-      finishIndex: this.state.finishIndex + 4
-    })
+    if (this.state.finishIndex < 100){
+      this.setState({
+        startIndex: this.state.startIndex + 4, 
+        finishIndex: this.state.finishIndex + 4
+      })
+    } else {
+      this.setState({
+        startIndex: 0, 
+        finishIndex: 4
+      })
+    }
   }
 
 
   render(){
+    console.log(this.state.startIndex, this.state.finishIndex)
     return (
         <div className="belt">
           {this.sushis()}
